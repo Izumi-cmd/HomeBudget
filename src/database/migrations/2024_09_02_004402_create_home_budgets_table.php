@@ -16,7 +16,7 @@ class CreateHomeBudgetsTable extends Migration
         Schema::create('home_budgets', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->string('category');
+            $table->foreignId('category_id')->constrained('categories');
             $table->integer('price');
             $table->timestamps();
         });

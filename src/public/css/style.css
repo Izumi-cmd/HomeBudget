@@ -58,6 +58,15 @@ body {
   }
 }
 
+/* アラート */
+.alert {
+  padding: var(--padding);
+  color: var(--primary-color);
+}
+
+.alert-message {
+  justify-self: left;
+}
 
 /* ヘッダー */
 .header {
