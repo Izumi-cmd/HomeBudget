@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomebudgetController extends Controller
@@ -13,7 +14,8 @@ class HomebudgetController extends Controller
      */
     public function index()
     {
-        return view('homebudget.index');
+        $categories = Category::all();
+        return view('homebudget.index', compact('categories'));
     }
 
     /**
