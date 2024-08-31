@@ -38,12 +38,17 @@
               </div>
               <div class="add-balance_form_group">
                 <label for="category" class="add-balance_label">カテゴリ:</label>
-                <select name="category" id="category" class="add-balance_select"  ></select>
-                {{-- カテゴリを選択するためのセレクトボックスを追加 --}}
+                <select name="category" id="category" class="add-balance_select"  >
+                  {{-- カテゴリを選択するためのセレクトボックスを追加 --}}
+                  <option value="">カテゴリを選択</option>
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                  @endforeach
+                </select>
               </div>
               <div class="add-balance_form_group">
                 <label for="price" class="add-balance_label">金額:</label>
-                <input type="text" id="price" name="price" class="add-balance_input">
+                <input type="number" id="price" name="price" class="add-balance_input" min="0" step="1">
               </div>
               <button type="submit" class="button add-balance_button">追加</button>
             </form>
