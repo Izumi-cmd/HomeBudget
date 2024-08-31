@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\HomeBudget;
+use App\Services\HomeBudgetService;
+use App\Http\Requests\HomebudgetRequest;
 use Illuminate\Http\Request;
 
 class HomebudgetController extends Controller
 {
+    private $homeBudgetService;
+
+    public function __construct(HomeBudgetService $homeBudgetService)
+    {
+        $this->homeBudgetService = $homeBudgetService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +44,12 @@ class HomebudgetController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HomebudgetRequest $request)
     {
-        //
+        // dd($request->validated());
+        $this->homeBudgetService->createHomeBudgets($request->validated());
+
+        return redirect()->route('homebudget.index')->with('success', '支出を追加しました。');
     }
 
     /**

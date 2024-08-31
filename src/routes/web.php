@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomebudgetController::class, 'index'])->name('homebudget.index');
+Route::post('/store', [HomebudgetController::class, 'store'])->name('homebudget.store');

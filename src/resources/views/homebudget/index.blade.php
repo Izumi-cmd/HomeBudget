@@ -11,9 +11,14 @@
         <h1 class="header_title">家計簿アプリ</h1>
     </header>
     <main>
-
+      {{-- メッセージ --}}
+        @if (session('success'))
+          <div class="alert alert-success">
+            <p class="alert-message">{{ session('success') }}</p>
+          </div>
+        @endif
         <section class="container">
-            <div class="balance">
+          <div class="balance">
             <h3 class="balance_title">支出一覧</h3>
             <table class="balance_table">
                 <thead>
@@ -27,28 +32,41 @@
                     <!-- 支出データのループ処理 -->
                 </tbody>
             </table>
-        </div>
+          </div>
 
-        <div class="add-balance">
+          <div class="add-balance">
             <h3 class="add-balance_title">支出の追加</h3>
-            <form action="/balances" method="POST" class="add-balance_form">
+            <form action="{{ route('homebudget.store') }}" method="POST" class="add-balance_form">
+              @csrf
+              {{-- 日付 --}}
               <div class="add-balance_form_group">
                 <label for="date" class="add-balance_label">日付:</label>
-                <input type="date" id="date" name="date" class="add-balance_input">
+                <input type="date" id="date" name="date" class="add-balance_input" required>
+                @error('date')
+                  <span class="add-balance_error">{{ $message }}</span>
+                @enderror
               </div>
+              {{-- カテゴリ --}}
               <div class="add-balance_form_group">
                 <label for="category" class="add-balance_label">カテゴリ:</label>
-                <select name="category" id="category" class="add-balance_select"  >
+                <select name="category" id="category" class="add-balance_select" required>
                   {{-- カテゴリを選択するためのセレクトボックスを追加 --}}
                   <option value="">カテゴリを選択</option>
                   @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                   @endforeach
                 </select>
+                @error('category')
+                  <span class="add-balance_error">{{ $message }}</span>
+                @enderror
               </div>
+              {{-- 金額 --}}
               <div class="add-balance_form_group">
                 <label for="price" class="add-balance_label">金額:</label>
-                <input type="number" id="price" name="price" class="add-balance_input" min="0" step="1">
+                <input type="number" id="price" name="price" class="add-balance_input" min="0" step="1" required>
+                @error('price')
+                  <span class="add-balance_error">{{ $message }}</span>
+                @enderror
               </div>
               <button type="submit" class="button add-balance_button">追加</button>
             </form>
