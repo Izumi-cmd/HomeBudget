@@ -1,7 +1,13 @@
 # Laravel_template
-自己学習用にLaravelのテンプレートを作成しました。
+家計簿管理アプリ
 
 # インフラ
 - nginx
 - Laravel
 - mysql
+
+# ユースケース
+
+#　ER図
+
+# 機能
