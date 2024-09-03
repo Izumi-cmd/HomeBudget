@@ -34,6 +34,14 @@
                         <td>{{ $homeBudget->format_date }}</td>
                         <td>{{ $homeBudget->category->name }}</td>
                         <td>{{ $homeBudget->format_price }}</td>
+                        <td>
+                          <a href="" class="button">編集</a>
+                          <form action="" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="button" onclick="return confirm('本当に削除しますか？');">削除</button>
+                          </form>
+                        </td>
                       </tr>
                     @endforeach
                 </tbody>
