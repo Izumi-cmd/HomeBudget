@@ -38,6 +38,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="pagination">
+              {{ $homeBudgets->links() }}
+            </div>
           </div>
 
           <div class="add-balance">

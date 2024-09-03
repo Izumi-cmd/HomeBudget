@@ -8,6 +8,7 @@ use App\Services\HomeBudgetService;
 use App\Http\Requests\HomebudgetRequest;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+
 class HomebudgetController extends Controller
 {
     private $homeBudgetService;
@@ -22,10 +23,10 @@ class HomebudgetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() : View
+    public function index(Request $request): View
     {
-        $categories = $this->homeBudgetService->getCategories();
-        $homeBudgets = $this->homeBudgetService->getHomeBudgets();
+        $categories = $this->homeBudgetService->getAllForCategories();
+        $homeBudgets = $this->homeBudgetService->getAllForHomeBudgets($request->input('perPage', 10));
         // dd($homeBudgets);
         return view('homebudget.index', compact('categories', 'homeBudgets'));
     }

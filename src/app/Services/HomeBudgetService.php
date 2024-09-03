@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Models\HomeBudget;
 use App\Models\Category;
 use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 class HomeBudgetService
 {
     public function __construct(
@@ -26,18 +28,18 @@ class HomeBudgetService
     }
 
     /**
-     * 支出一覧を取得
+     * 支出一覧をページネーションで取得
      */
-    public function getHomeBudgets(): Collection
+    public function getAllForHomeBudgets(int $perPage = 10): LengthAwarePaginator
     {
-        $homeBudgets = HomeBudget::with('category')->orderBy('date', 'desc')->get();
+        $homeBudgets = HomeBudget::with('category')->orderBy('date', 'desc')->paginate($perPage);
         return $homeBudgets;
     }
 
     /**
      * カテゴリー一覧を取得
      */
-    public function getCategories(): Collection
+    public function getAllForCategories(): Collection
     {
         return Category::all();
     }
