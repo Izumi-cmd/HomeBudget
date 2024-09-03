@@ -118,7 +118,6 @@ h2 {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
   border-collapse: collapse;
 }
 .balance thead,
@@ -127,21 +126,16 @@ h2 {
   display: contents;
 }
 
+.balance tbody tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
 .balance thead th,
 .balance tbody td {
-  padding: 12px;
+  padding: var(--padding);
   text-align: left;
   border-bottom: 1px solid #ccc;
 }
-
-.balance td {
-  border-top: 1px solid #ccc;
-}
-
-.balance tbody tr:nth-child(odd) {
-background: #f2f2f2;
-}
-
 
 /* 支出の追加 */
 .add-balance {

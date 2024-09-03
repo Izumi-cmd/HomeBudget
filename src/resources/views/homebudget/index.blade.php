@@ -29,7 +29,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- 支出データのループ処理 -->
+                    @foreach ($homeBudgets as $homeBudget)
+                      <tr>
+                        <td>{{ $homeBudget->format_date }}</td>
+                        <td>{{ $homeBudget->category->name }}</td>
+                        <td>{{ $homeBudget->format_price }}</td>
+                      </tr>
+                    @endforeach
                 </tbody>
             </table>
           </div>
@@ -63,7 +69,7 @@
               {{-- 金額 --}}
               <div class="add-balance_form_group">
                 <label for="price" class="add-balance_label">金額:</label>
-                <input type="number" id="price" name="price" class="add-balance_input" min="0" step="1" required>
+                <input type="number" id="price" name="price" class="add-balance_input" min="0" step="1" required placeholder="金額を入力">
                 @error('price')
                   <span class="add-balance_error">{{ $message }}</span>
                 @enderror

@@ -3,21 +3,42 @@
 namespace App\Services;
 
 use App\Models\HomeBudget;
-
+use App\Models\Category;
+use Illuminate\Support\Collection;
 class HomeBudgetService
 {
+    public function __construct(
+    )
+    {
+    }
 
-  public function __construct()
-  {
-  }
-
+    /**
+     * 支出を追加
+     */
     public function createHomeBudgets(array $data): HomeBudget
     {
-      $setParams = [
-        'date' => $data['date'],
-        'category_id' => $data['category'],
-        'price' => $data['price'],
-      ];
-      return HomeBudget::create($setParams);
+        $setParams = [
+          'date' => $data['date'],
+          'category_id' => $data['category'],
+          'price' => $data['price'],
+        ];
+        return HomeBudget::create($setParams);
+    }
+
+    /**
+     * 支出一覧を取得
+     */
+    public function getHomeBudgets(): Collection
+    {
+        $homeBudgets = HomeBudget::with('category')->orderBy('date', 'desc')->get();
+        return $homeBudgets;
+    }
+
+    /**
+     * カテゴリー一覧を取得
+     */
+    public function getCategories(): Collection
+    {
+        return Category::all();
     }
 }
