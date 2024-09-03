@@ -7,6 +7,7 @@ use App\Models\HomeBudget;
 use App\Services\HomeBudgetService;
 use App\Http\Requests\HomebudgetRequest;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomebudgetController extends Controller
 {
@@ -18,14 +19,16 @@ class HomebudgetController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * 支出一覧を表示
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request): View
     {
-        $categories = Category::all();
-        return view('homebudget.index', compact('categories'));
+        $categories = $this->homeBudgetService->getAllForCategories();
+        $homeBudgets = $this->homeBudgetService->getAllForHomeBudgets($request->input('perPage', 10));
+        // dd($homeBudgets);
+        return view('homebudget.index', compact('categories', 'homeBudgets'));
     }
 
     /**

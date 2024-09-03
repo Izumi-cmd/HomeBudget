@@ -21,6 +21,7 @@
   --primary-color: #8ec04a;
   --secondary-color: #16734c;
   --background-color: #f2f2f2;
+  --border-color: #ddd;
 }
 
 
@@ -114,32 +115,79 @@ h2 {
   margin-bottom: 20px;
 }
 
-.balance table {
+.balance_table {
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
   border-collapse: collapse;
 }
-.balance thead,
-.balance tbody,
-.balance tr{
-  display: contents;
+
+.balance_table th,
+.balance_table td {
+  padding: var(--padding);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.balance thead th,
-.balance tbody td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ccc;
+.balance_table thead {
+  background-color: #f2f2f2;
+  font-weight: bold;
 }
 
-.balance td {
-  border-top: 1px solid #ccc;
+.balance_table th:last-child,
+.balance_table td:last-child {
+  width: 200px;
+  text-align: center;
 }
 
-.balance tbody tr:nth-child(odd) {
-background: #f2f2f2;
+.balance_table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.balance_table td:nth-child(3) {
+  text-align: right;
+}
+
+.balance_table .button {
+  display: inline-grid;
+  padding: 7px 13px;
+  margin: 2px;
+  background-color: #48d34d;
+  color: #fff;
+  text-decoration: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.balance_table .button[type="submit"] {
+  background-color: #ca2a1f;
+}
+
+.balance_table form {
+  display: inline;
+}
+
+/* ページネーション */
+.pagination {
+  display: flex;
+  justify-content: end;
+}
+
+.page-item {
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+.pagination li.active {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.pagination li {
+  padding: 10px 15px;
+  text-decoration: none;
+  color: var(--font-color);
+  background-color: transparent;
+  border: none;
 }
 
 
