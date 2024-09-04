@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <title>家計簿アプリ</title>
     <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
+    @livewireStyles
 </head>
 <body>
     <header class="header">
@@ -26,6 +28,7 @@
                         <th>日付</th>
                         <th>カテゴリ</th>
                         <th>金額</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +38,11 @@
                         <td>{{ $homeBudget->category->name }}</td>
                         <td>{{ $homeBudget->format_price }}</td>
                         <td>
-                          <a href="" class="button">編集</a>
-                          <form action="" method="POST">
+                          @livewire('modal', ['homeBudgetId' => $homeBudget->id])
+                          <form action="" method="POST" class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="button" onclick="return confirm('本当に削除しますか？');">削除</button>
+                            <button type="submit" class="button delete-button" onclick="return confirm('本当に削除しますか？');">削除</button>
                           </form>
                         </td>
                       </tr>
@@ -49,6 +52,7 @@
             <div class="pagination">
               {{ $homeBudgets->links() }}
             </div>
+
           </div>
 
           <div class="add-balance">
@@ -90,5 +94,6 @@
             </div>
         </section>
     </main>
+    @livewireScripts
 </body>
 </html>
