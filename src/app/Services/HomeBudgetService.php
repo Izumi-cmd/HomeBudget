@@ -38,9 +38,10 @@ class HomeBudgetService
 
     /**
      * カテゴリー一覧を取得
+     * AppServiceProviderで全てのビューに定義した。
      */
-    public function getAllForCategories(): Collection
-    {
-        return Category::all();
-    }
+    // public function getAllForCategories(): Collection
+    // {
+    //     return Category::all();
+    // }
 }
