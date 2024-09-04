@@ -25,10 +25,9 @@ class HomebudgetController extends Controller
      */
     public function index(Request $request): View
     {
-        $categories = $this->homeBudgetService->getAllForCategories();
         $homeBudgets = $this->homeBudgetService->getAllForHomeBudgets($request->input('perPage', 10));
         // dd($homeBudgets);
-        return view('homebudget.index', compact('categories', 'homeBudgets'));
+        return view('homebudget.index', compact('homeBudgets'));
     }
 
     /**
