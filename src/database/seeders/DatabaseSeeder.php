@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+use App\Models\HomeBudget;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategorySeeder::class,
         ]);
+
+        HomeBudget::factory(30)->create();
     }
 }
