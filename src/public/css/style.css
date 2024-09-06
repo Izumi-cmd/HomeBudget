@@ -19,13 +19,11 @@
 
     /* 色 */
     --font-color: #888;
-    --primary-color: #add378;
-    --secondary-color: #16734c;
-    --background-color: #f2f2f2;
+    --primary-color: #aab396;
+    --secondary-color: #f7eed3;
     --border-color: #ddd;
     --gray-color: rgba(0, 0, 0, 0.5);
-    --primary-button-color: rgba(245, 72, 72, 0.8);
-    --secondary-button-color: #ccc;
+    --add-color: #eeaf50;
 }
 
 /* 共通CSS */
@@ -33,20 +31,22 @@ body {
     color: var(--font-color);
     width: var(--max-width);
     font-family: Arial, sans-serif;
-    background-color: var(--background-color);
     margin: 0 auto;
 }
 
 .button {
+    font-family: inherit; /* ボタンのフォントを継承 */
     padding: 8px 16px;
     background-color: var(--primary-color);
     border-radius: calc(1px / 0);
     cursor: pointer;
     display: grid;
-    grid-template-columns: 1fr auto 1fr;
+    grid-template-columns: 1fr auto 1fr 0;
     gap: 10px;
     align-items: center;
     align-content: center;
+    border: 1px solid #999;
+    border-bottom: 5px solid #999;
 
     &::before {
         content: "";
@@ -60,6 +60,11 @@ body {
         aspect-ratio: 1;
         background: linear-gradient(currentColor 0 0), CanvasText; /* テキストの色を使用 */
     }
+}
+
+.button:hover {
+    transform: translateY(3px);
+    border-bottom: 2px solid #999;
 }
 
 /* アラート */
@@ -148,14 +153,7 @@ h2 {
 
 .balance_table .button {
     display: inline-grid;
-    padding: 7px 13px;
     margin: 2px;
-    background-color: var(--secondary-button-color);
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
 }
 
 .balance_table .button[type="submit"] {
@@ -231,4 +229,5 @@ h2 {
 
 .add-balance_button {
     width: 100%;
+    background-color: var(--add-color);
 }
