@@ -16,15 +16,25 @@ class Modal extends Component
     public $date;
     public $category_id;
     public $price;
+    public $modalType = 'edit'; /* defaultは編集画面 */
+    public $title;
 
 
+    /**
+     * livewireの初期状態を定義
+     * @param int $homeBudgetId
+     * @return void
+     */
     public function mount(int $homeBudgetId)
     {
         $this->homeBudgetId = $homeBudgetId;
         $this->loadHomeBudgetForId();
     }
 
-
+    /**
+     * idを指定してhomeBudgetを取得
+     * @return void
+     */
     public function loadHomeBudgetForId()
     {
         $homeBudget = HomeBudget::findOrFail($this->homeBudgetId);
@@ -35,10 +45,12 @@ class Modal extends Component
 
 
     /**
+     * 使用するモーダルを定義。この場合はlivewire.modal.blade.phpを使用
      * @return \Illuminate\View\View
      */
     public function render(): View
     {
+
         return view('livewire.modal');
     }
 
@@ -59,6 +71,10 @@ class Modal extends Component
         $this->reset(['date', 'category_id', 'price']);
     }
 
+    /**
+     * HomeBudgetの更新処理
+     * @return void
+     */
     public function updateHomeBudget()
     {
         $this->validate([
@@ -75,8 +91,22 @@ class Modal extends Component
         ]);
 
         $this->closeModal();
-        session()->flash('message', '更新しました');
+        session()->flash('success', '更新しました');
 
+        $this->redirect(route('homebudget.index'));
+    }
+
+    /**
+     * HomeBudgetの削除処理
+     * @return void
+     */
+    public function deleteHomeBudget()
+    {
+        $homeBudget = HomeBudget::findOrFail($this->homeBudgetId);
+        $homeBudget->delete();
+
+        $this->closeModal();
+        session()->flash('success', '削除しました');
         $this->redirect(route('homebudget.index'));
     }
 }

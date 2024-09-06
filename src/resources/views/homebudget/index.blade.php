@@ -38,12 +38,10 @@
                         <td>{{ $homeBudget->category->name }}</td>
                         <td>{{ $homeBudget->format_price }}</td>
                         <td>
-                          @livewire('modal', ['homeBudgetId' => $homeBudget->id])
-                          <form action="" method="POST" class="delete-form">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="button delete-button" onclick="return confirm('本当に削除しますか？');">削除</button>
-                          </form>
+                          {{-- 編集画面 --}}
+                          @livewire('modal', ['homeBudgetId' => $homeBudget->id, 'modalType' => 'edit','title' => '編集'])
+                          {{-- 削除画面 --}}
+                          @livewire('modal', ['homeBudgetId' => $homeBudget->id, 'modalType' => 'delete','title' => '削除'])
                         </td>
                       </tr>
                     @endforeach
@@ -52,9 +50,9 @@
             <div class="pagination">
               {{ $homeBudgets->links() }}
             </div>
-
           </div>
 
+          {{-- 支出の追加 --}}
           <div class="add-balance">
             <h3 class="add-balance_title">支出の追加</h3>
             <form action="{{ route('homebudget.store') }}" method="POST" class="add-balance_form">
