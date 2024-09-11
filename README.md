@@ -21,7 +21,14 @@
 git clone git@github.com:Izumi-cmd/HomeBudget.git
 ```
 
-2. 初期設定をする。
+2. 依存関係をインストールします。
+
+```
+# bash
+composer install
+```
+
+3. 初期設定をする。
 
 ```
 # .envファイルを作成する。
@@ -29,13 +36,6 @@ cp .env.example .env
 
 # アプリケーションキーを生成
 php artisan key:generate
-```
-
-3. 依存関係をインストールします。
-
-```
-# bash
-composer install
 ```
 
 4. マイグレーションを実行
